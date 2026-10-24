@@ -17,3 +17,27 @@
   });
   if(/[?&]present\b/.test(location.search))enter();
 })();
+(function(){
+  var b=document.body,side=document.getElementById('side'),crumb=document.getElementById('crumb');
+  var scrim=document.createElement('div');scrim.className='scrim';b.appendChild(scrim);
+  document.getElementById('menu').onclick=function(){b.classList.toggle('menu')};
+  scrim.onclick=function(){b.classList.remove('menu')};
+  side.addEventListener('click',function(e){if(e.target.closest('a'))b.classList.remove('menu')});
+  var secs=[].slice.call(document.querySelectorAll('.slide[id]'));
+  var links={};[].slice.call(side.querySelectorAll('a[href^="#"]')).forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
+  var chapOf={},cur='partA';secs.forEach(function(s){if(s.classList.contains('chapter'))cur=s.id;chapOf[s.id]=/^s\d/.test(s.id)?cur:s.id});
+  var last=null;
+  function spy(){
+    if(b.classList.contains('present'))return;
+    var y=window.scrollY+110,id=secs[0].id;
+    for(var i=0;i<secs.length;i++){if(secs[i].offsetTop<=y)id=secs[i].id;else break}
+    if(id===last)return;last=id;
+    side.querySelectorAll('.on').forEach(function(e){e.classList.remove('on')});
+    var a=links[id];if(a){a.classList.add('on');var g=a.closest('.grp');if(g)g.classList.add('on')}
+    var ch=links[chapOf[id]];if(ch){var g2=ch.closest('.grp');if(g2)g2.classList.add('on')}
+    var h=document.getElementById(id).querySelector('h2,h1');
+    crumb.textContent=id==='top'?'פתיחה':(h?h.textContent:'');
+    if(a&&a.scrollIntoView&&side.querySelector('.side-nav').scrollHeight>side.clientHeight)a.scrollIntoView({block:'nearest'});
+  }
+  window.addEventListener('scroll',spy,{passive:true});spy();
+})();

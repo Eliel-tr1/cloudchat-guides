@@ -12,13 +12,17 @@ def F(key, caption, legend):
         f'<div class="mk {a["s"]}" style="left:{a["l"]:.2f}%;top:{a["t"]:.2f}%;width:{a["w"]:.2f}%;height:{a["h"]:.2f}%"><span>{a["n"]}</span></div>'
         for a in f['annos'])
     leg = ''.join(f'<li><b>{i + 1}</b><span>{t}</span></li>' for i, t in enumerate(legend))
-    mw = min(940, int(600 / (f['ratio'] / 100)))
+    mw = min(940, int(500 / (f['ratio'] / 100)))
     return (f'<figure class="shot {'tall' if f['ratio'] > 66 else 'wide'}" style="--mw:{mw}px"><div class="frame" style="aspect-ratio:{100/f["ratio"]:.4f};--ar:{100/f["ratio"]:.4f}">'
             f'<img src="{f["src"]}" alt="{caption}" loading="lazy">{marks}</div>'
             f'<figcaption>{caption}</figcaption>' + (f'<ol class="legend">{leg}</ol>' if legend else '') + '</figure>')
 
 
+STEPS = []
+
+
 def step(n, title, body, part=''):
+    STEPS.append((n, title))
     return f'''<section class="card slide {part}" id="s{n}"><div class="step"><div class="badge">{n}</div><div class="body"><h2>{title}</h2>{body}</div></div></section>'''
 
 
@@ -26,8 +30,25 @@ def tip(title, text, kind='tip'):
     return f'<div class="{kind}"><span class="ttl">{title}</span>{text}</div>'
 
 
+ICONS = {
+ 'partA': '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
+ 'partB': '<rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/>',
+ 'partC': '<rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/>',
+ 'tips': '<path d="M7 10v12"/><path d="M15 5.9 14 10h5.8a2 2 0 0 1 1.9 2.6l-2.3 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.8a2 2 0 0 0 1.8-1.1L12 2a3.1 3.1 0 0 1 3 3.9z"/>',
+ 'help': '<circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/>',
+ 'top': '<path d="M3 9.5 12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/>',
+}
+CHAPTERS = []
+
+
+def ico(k):
+    return f'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{ICONS[k]}</svg>'
+
+
 def chapter(cid, kicker, title, lead, who):
-    return f'''<section class="chapter slide" id="{cid}"><div class="kicker">{kicker}</div><h1>{title}</h1><p class="lead">{lead}</p><div class="who">{who}</div></section>'''
+    CHAPTERS.append((cid, kicker, title, len(STEPS)))
+    mgr = ' mgr' if 'מנהלים' in who else ''
+    return f'''<section class="chapter slide" id="{cid}"><div class="chip-ico">{ico(cid)}</div><div><div class="kicker">{kicker}<span class="who{mgr}">{who}</span></div><h1>{title}</h1><p class="lead">{lead}</p></div></section>'''
 
 
 parts = []
@@ -35,15 +56,16 @@ parts = []
 # ================= cover =================
 parts.append('''
 <header class="cover slide" id="top">
-  <div class="logo"><i></i>CloudChat · מדריך עלייה לאוויר</div>
+  <div class="brands"><img src="img/logo_cloudchat.png" alt="CloudChat"><span class="amp">&amp;</span><img src="img/logo_vitrue.png" alt="Vitrue"></div>
+  <div class="eyebrow">מדריך עלייה לאוויר</div>
   <h1>הסוכן שלכם באוויר.<br>ככה עובדים איתו מהיום.</h1>
   <p class="lead">מדריך אחד לכל הצוות: איך עונים ללקוחות בקלאודצ'אט, איך עוצרים את הסוכן כשנציג נכנס לשיחה, ואיך המנהלים רואים ומשפרים אותו בפורטל.</p>
   <div class="toc">
-    <a href="#partA" class="tocc a"><span class="tag">לכל הנציגים</span><b>חלק א'</b>קלאודצ'אט: הלייב צ'אט<small>התחברות · שיחות · סטטוסים · העברה לנציג · עצירת הסוכן · התראות</small></a>
-    <a href="#partB" class="tocc b"><span class="tag">לכל הנציגים</span><b>חלק ב'</b>האפליקציה בנייד<small>הורדה · התחברות · התראות בטלפון</small></a>
-    <a href="#partC" class="tocc c"><span class="tag mgr">למנהלים בלבד</span><b>חלק ג'</b>הפורטל<small>שיחות · ההנחיות של הסוכן · משוב ושיפור</small></a>
+    <a href="#partA" class="tocc"><span class="ti">''' + ico('partA') + '''</span><span class="tag">לכל הנציגים</span><b>חלק א'</b><strong>קלאודצ'אט: הלייב צ'אט</strong><small>התחברות · שיחות · סטטוסים · העברה לנציג · עצירת הסוכן · התראות</small></a>
+    <a href="#partB" class="tocc"><span class="ti">''' + ico('partB') + '''</span><span class="tag">לכל הנציגים</span><b>חלק ב'</b><strong>האפליקציה בנייד</strong><small>הורדה · התחברות · התראות בטלפון</small></a>
+    <a href="#partC" class="tocc"><span class="ti">''' + ico('partC') + '''</span><span class="tag mgr">למנהלים בלבד</span><b>חלק ג'</b><strong>הפורטל</strong><small>שיחות · ההנחיות של הסוכן · משוב ושיפור</small></a>
   </div>
-  <div class="howto">שני דברים שכדאי לזכור מהיום הראשון:
+  <div class="howto"><div class="howto-t">שני דברים שכדאי לזכור מהיום הראשון</div>
     <ul><li><b>הסוכן עונה לבד</b>, עד שנציג נכנס לשיחה. נציג שכותב ללקוח עוצר את הסוכן אוטומטית בשיחה הזו (צעד 7).</li>
     <li><b>כל טעות של הסוכן היא הזדמנות</b>. משוב קצר בפורטל הופך לשיפור אמיתי (צעד 18).</li></ul></div>
 </header>''')
@@ -234,17 +256,41 @@ parts.append('''<section class="card slide help" id="help"><h2 class="sec">צר�
 <div><b>רוצים לשנות משהו בסוכן?</b><p>משוב בפורטל (צעד 18). זו הדרך המהירה ביותר לשיפור.</p></div>
 </div></section>''')
 
-parts.append('<footer>CloudChat · מדריך עלייה לאוויר · אוקטובר 2026<br><small>הצילומים מטושטשים או לקוחים ממערכת הדגמה. המסכים אצלכם יציגו את הנתונים שלכם.</small></footer>')
+parts.append('<footer><div class="fbrands"><img src="img/logo_cloudchat.png" alt="CloudChat"><img src="img/logo_vitrue.png" alt="Vitrue"></div>CloudChat &amp; Vitrue · מדריך עלייה לאוויר · אוקטובר 2026<br><small>הצילומים מטושטשים או לקוחים ממערכת הדגמה. המסכים אצלכם יציגו את הנתונים שלכם.</small></footer>')
 
 CSS = open(os.path.join(S, 'guide.css')).read()
 JS = open(os.path.join(S, 'guide.js')).read()
+def sidebar():
+    out = [f'<a href="#top" class="nv top">{ico("top")}<span>פתיחה</span></a>']
+    bounds = [c[3] for c in CHAPTERS] + [len(STEPS)]
+    for k, (cid, kicker, title, start) in enumerate(CHAPTERS):
+        short = {'partA': "קלאודצ'אט", 'partB': 'האפליקציה', 'partC': 'הפורטל'}[cid]
+        mgr = '<em>מנהלים</em>' if cid == 'partC' else ''
+        out.append(f'<div class="grp"><a href="#{cid}" class="nv chap">{ico(cid)}<span>{kicker} · {short}</span>{mgr}</a><div class="subs">')
+        for n, t in STEPS[start:bounds[k + 1]]:
+            t2 = re.sub('<[^>]+>', '', t)
+            out.append(f'<a href="#s{n}" class="sub"><i>{n}</i><span>{t2}</span></a>')
+        out.append('</div></div>')
+    out.append(f'<a href="#tips" class="nv">{ico("tips")}<span>משוב שמשפר</span></a>')
+    out.append(f'<a href="#help" class="nv">{ico("help")}<span>צריכים עזרה?</span></a>')
+    return ''.join(out)
+
+
 doc = f'''<!DOCTYPE html>
 <html dir="rtl" lang="he"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>מדריך עלייה לאוויר · CloudChat</title>
+<title>מדריך עלייה לאוויר · CloudChat &amp; Vitrue</title>
 <meta name="description" content="מדריך עלייה לאוויר: לייב צ'אט בקלאודצ'אט, האפליקציה, והפורטל למנהלים">
+<link rel="icon" href="img/cloudchat_icon.png">
 <style>{CSS}</style></head><body>
-<nav class="bar"><a href="#top" class="home"><i></i>מדריך עלייה לאוויר</a><div class="links"><a href="#partA">קלאודצ'אט</a><a href="#partB">אפליקציה</a><a href="#partC">פורטל</a></div><a class="pdf" href="cloudchat-golive-guide.pdf" download>הורדת PDF</a><button id="pres" type="button" title="מצב הצגה: שקף אחד בכל מסך, מעבר בחצים">מצב הצגה</button></nav>
-<div class="wrap">{''.join(parts)}</div>
+<aside class="side" id="side"><div class="side-head"><img src="img/cloudchat_icon.png" alt=""><div><b>CloudChat</b><small>מדריך עלייה לאוויר</small></div></div>
+<nav class="side-nav">{sidebar()}</nav>
+<div class="side-foot"><span>בשיתוף</span><img src="img/logo_vitrue.png" alt="Vitrue"></div></aside>
+<div class="main">
+<header class="top"><button id="menu" type="button" aria-label="תפריט"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+<div class="crumb" id="crumb">פתיחה</div>
+<a class="tbtn" href="cloudchat-golive-guide.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>הורדת PDF</a>
+<button id="pres" class="tbtn primary" type="button" title="מצב הצגה: שקף אחד בכל מסך, מעבר בחצים"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>מצב הצגה</button></header>
+<div class="wrap">{''.join(parts)}</div></div>
 <div id="pnav"><button id="pprev" type="button">&rarr;</button><span id="pcount" dir="ltr"></span><button id="pnext" type="button">&larr;</button><button id="pexit" type="button">יציאה</button></div>
 <script>{JS}</script></body></html>'''
 
