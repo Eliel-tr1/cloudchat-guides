@@ -1,0 +1,102 @@
+#!/usr/bin/env python3
+"""Builds the go-live guide: crops/blurs screenshots, renders index.html with numbered overlays."""
+import json, os, shutil, html
+from PIL import Image, ImageFilter
+
+S = os.path.dirname(os.path.abspath(__file__))
+SH = os.path.join(S, 'shots2')
+OUT = os.path.join(S, 'guide')
+IMG = os.path.join(OUT, 'img')
+os.makedirs(IMG, exist_ok=True)
+
+# extra privacy blur in source pixel space (1440x860)
+BLUR = {
+    'cc_assign_menu': [[440, 315, 128, 505], [548, 8, 82, 42]],
+    'cc_notif': [[1222, 4, 125, 44]],
+    'cc_profile_menu': [[140, 72, 105, 44], [300, 108, 100, 28]],
+    'cc_overview': [[1240, 104, 170, 72], [300, 106, 95, 30], [1216, 3, 131, 47]],
+    'cc_status_menu': [[1216, 3, 131, 47]],
+}
+
+FIGS = {}
+
+
+def fig(key, src, crop, annos, blur_extra=None):
+    """annos: list of (n, [x,y,w,h], style) in source pixels; style 'box' or 'dot'."""
+    im = Image.open(os.path.join(SH, src + '.png')).convert('RGB')
+    for r in BLUR.get(src, []) + (blur_extra or []):
+        x, y, w, h = r
+        box = (x, y, x + w, y + h)
+        im.paste(im.crop(box).filter(ImageFilter.GaussianBlur(7)), box)
+    cx, cy, cw, ch = crop
+    im = im.crop((cx, cy, cx + cw, cy + ch))
+    fn = key + '.png'
+    im.save(os.path.join(IMG, fn), optimize=True)
+    a = []
+    for n, (x, y, w, h), *st in annos:
+        pad = 4
+        a.append({'n': n, 'l': (x - cx - pad) / cw * 100, 't': (y - cy - pad) / ch * 100,
+                  'w': (w + 2 * pad) / cw * 100, 'h': (h + 2 * pad) / ch * 100, 's': st[0] if st else 'box'})
+    FIGS[key] = {'src': 'img/' + fn, 'annos': a, 'ratio': ch / cw * 100}
+
+
+# ---------- CloudChat ----------
+fig('cc_login', 'cc_login', [880, 150, 560, 470], [
+    (1, [940, 318, 400, 48]), (2, [940, 420, 400, 48]), (3, [940, 532, 400, 41]), (4, [940, 488, 150, 22])])
+fig('cc_overview', 'cc_overview', [0, 0, 1440, 860], [
+    (1, [1226, 58, 213, 130]), (2, [1054, 135, 169, 110]), (3, [1054, 296, 169, 416]), (4, [813, 102, 241, 757]),
+    (5, [861, 62, 96, 30]), (6, [400, 102, 412, 535]), (7, [433, 62, 130, 32], 'l'), (8, [568, 57, 40, 41]),
+    (9, [8, 671, 384, 119])])
+fig('cc_folders', 'cc_overview', [1040, 54, 400, 690], [
+    (1, [1054, 135, 169, 36]), (2, [1054, 171, 169, 74], 'l'), (3, [1054, 296, 169, 416]), (4, [1226, 58, 213, 130])])
+fig('cc_status', 'cc_status_menu', [295, 52, 540, 790], [
+    (1, [460, 62, 103, 32]), (2, [433, 62, 27, 32]), (3, [318, 148, 240, 136]), (4, [318, 300, 240, 108])])
+fig('cc_assign', 'cc_assign_menu', [360, 52, 470, 790], [
+    (1, [568, 57, 40, 41]), (2, [384, 150, 214, 44]), (3, [384, 220, 214, 32]), (4, [420, 270, 142, 30]),
+    (5, [380, 315, 225, 505])])
+fig('cc_pause_menu', 'cc_pause_menu', [0, 270, 440, 560], [
+    (1, [50, 688, 85, 32]), (2, [22, 688, 28, 32], 'l'), (3, [28, 284, 91, 392]), (4, [8, 735, 384, 40])])
+fig('cc_paused', 'cc_paused', [0, 655, 440, 150], [
+    (1, [45, 736, 347, 38]), (2, [9, 736, 36, 38])])
+fig('cc_template', 'cc_template', [400, 560, 415, 300], [
+    (1, [401, 686, 411, 29]), (2, [557, 755, 175, 32]), (3, [670, 810, 140, 45])])
+fig('cc_profile', 'cc_profile_menu', [0, 0, 420, 640], [
+    (1, [60, 4, 60, 44]), (2, [20, 120, 225, 30])])
+fig('cc_notif', 'cc_notif', [0, 54, 1440, 806], [
+    (1, [1378, 515, 60, 40]), (2, [1162, 226, 212, 42]), (3, [790, 640, 350, 125]), (4, [712, 672, 32, 58]),
+    (5, [692, 780, 72, 40])])
+
+# ---------- Portal ----------
+fig('p_login', 'p_login', [850, 250, 480, 420], [
+    (1, [889, 393, 400, 40]), (2, [889, 477, 400, 40]), (3, [889, 525, 79, 28]), (4, [889, 569, 400, 48])])
+fig('p_dash', 'p_dash', [0, 0, 1440, 860], [
+    (1, [1181, 76, 247, 250]), (2, [47, 238, 1089, 40]), (3, [47, 298, 1089, 211]), (4, [163, 14, 93, 32])])
+fig('p_convs', 'p_convs', [0, 60, 1440, 800], [
+    (1, [825, 145, 298, 40]), (2, [825, 197, 298, 47]), (3, [792, 747, 335, 52]), (4, [193, 158, 40, 40]),
+    (5, [97, 158, 40, 40]), (6, [214, 369, 31, 31]), (7, [49, 158, 40, 40])])
+fig('p_agent_map', 'p_agent_map', [0, 0, 1440, 860], [
+    (1, [1177, 68, 183, 33]), (2, [1177, 138, 183, 33]), (3, [1177, 173, 183, 68]), (4, [1177, 277, 183, 33]),
+    (5, [600, 417, 260, 122])])
+fig('p_playbook', 'p_playbook', [0, 0, 720, 860], [
+    (1, [36, 277, 362, 352]), (2, [310, 808, 105, 40])])
+fig('p_persona', 'p_persona', [0, 60, 1440, 800], [
+    (1, [72, 366, 1039, 40]), (2, [72, 551, 1039, 260]), (3, [99, 142, 119, 32]), (4, [52, 143, 30, 30])])
+fig('p_fb_form', 'p_fb_form', [450, 150, 540, 560], [
+    (1, [728, 299, 224, 40]), (2, [488, 299, 224, 40]), (3, [488, 383, 464, 40]), (4, [488, 467, 464, 142]),
+    (5, [488, 641, 149, 40])])
+fig('p_feedback', 'p_feedback', [0, 60, 1440, 370], [
+    (1, [463, 186, 673, 47]), (2, [32, 283, 1104, 40]), (3, [33, 377, 1102, 30])])
+fig('p_fb_item', 'p_fb_item', [355, 75, 730, 712], [
+    (1, [940, 160, 110, 24]), (2, [409, 565, 622, 68]), (3, [392, 715, 105, 40]), (4, [505, 715, 103, 40]),
+    (5, [1000, 323, 50, 22])])
+
+json.dump(FIGS, open(os.path.join(S, 'figs.json'), 'w'), ensure_ascii=False, indent=1)
+
+for f in ['qr_ios.svg', 'qr_android.svg', 'qr_portal.svg']:
+    shutil.copy(os.path.join(S, 'assets', f), os.path.join(IMG, f))
+shutil.copy(os.path.join(S, 'assets', 's10_26.png'), os.path.join(IMG, 'icon_ios.png'))
+shutil.copy(os.path.join(S, 'assets', 's10_25.png'), os.path.join(IMG, 'icon_android.png'))
+shutil.copy(os.path.join(S, 'assets', 's10_22.png'), os.path.join(IMG, 'badge_appstore.png'))
+shutil.copy(os.path.join(S, 'assets', 's10_23.png'), os.path.join(IMG, 'badge_gplay.png'))
+shutil.copy('/home/hermes/Claude Code/scale-conf/fonts/Heebo.ttf', os.path.join(OUT, 'Heebo.ttf'))
+print('figs', len(FIGS))
