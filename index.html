@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>מדריך עלייה לאוויר · CloudChat</title>
+<meta name="description" content="מדריך עלייה לאוויר: לייב צ'אט בקלאודצ'אט, האפליקציה, והפורטל למנהלים">
+<style>@font-face{font-family:'Heebo';src:url('Heebo.ttf') format('truetype');font-weight:100 900;font-display:swap}
+:root{--brand:#5b4be6;--brand-d:#4334c9;--brand-soft:#f4f3ff;--brand-line:#ddd9ff;--ink:#161a26;--muted:#5f6478;--line:#e6e8f0;--bg:#f6f7fb;
+--mark:#ff5a36;--ok:#12b76a;--ok-bg:#ecfdf3;--warn:#f0b429;--warn-bg:#fff9ec;--warn-line:#f3dda8;--red:#e5484d;--red-bg:#fff1f1;--mgr:#0e7490;--mgr-bg:#e6f6fa}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Heebo',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+a{color:var(--brand)}
+.bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:18px;padding:10px 22px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar .home{display:flex;align-items:center;gap:9px;font-weight:700;color:var(--ink);text-decoration:none;font-size:15px}
+.bar .home i,.logo i{width:10px;height:10px;border-radius:50%;background:var(--brand);display:block}
+.bar .links{display:flex;gap:4px;margin-inline-start:auto}
+.bar .links a{text-decoration:none;color:var(--muted);font-size:14px;font-weight:500;padding:6px 12px;border-radius:9px}
+.bar .links a:hover{background:var(--brand-soft);color:var(--brand)}
+.bar .pdf{text-decoration:none;font-size:14px;font-weight:600;color:var(--muted);padding:7px 12px;border:1px solid var(--line);border-radius:10px}
+#pres{border:1px solid var(--brand-line);background:var(--brand-soft);color:var(--brand);font:inherit;font-weight:600;font-size:14px;padding:7px 14px;border-radius:10px;cursor:pointer}
+.wrap{max-width:960px;margin:0 auto;padding:26px 20px 70px}
+.cover{text-align:center;padding:34px 0 26px}
+.logo{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:14px;color:var(--muted);margin-bottom:16px}
+.cover h1{font-size:clamp(28px,4.8vw,44px);line-height:1.18;font-weight:800;letter-spacing:-.4px}
+.lead{font-size:clamp(15px,2vw,18px);color:var(--muted);margin:14px auto 0;max-width:720px}
+.toc{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px;text-align:right}
+.tocc{display:block;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 18px;text-decoration:none;color:var(--ink);font-size:17px;font-weight:700;line-height:1.35;transition:transform .12s,box-shadow .12s;border-top:5px solid var(--brand)}
+.tocc.b{border-top-color:#8b7cf6}.tocc.c{border-top-color:var(--mgr)}
+.tocc:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(20,25,50,.08)}
+.tocc b{display:block;font-size:13px;color:var(--muted);font-weight:600;margin:8px 0 2px}
+.tocc small{display:block;font-size:13px;font-weight:400;color:var(--muted);margin-top:6px}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;background:var(--brand-soft);color:var(--brand);padding:2px 9px;border-radius:20px}
+.tag.mgr{background:var(--mgr-bg);color:var(--mgr)}
+.howto{margin-top:22px;text-align:right;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 20px;font-weight:700}
+.howto ul{list-style:none;margin-top:8px;font-weight:400;color:#3f4457}
+.howto li{position:relative;padding-inline-start:22px;margin-top:6px}
+.howto li:before{content:'';position:absolute;right:2px;top:10px;width:9px;height:9px;border-radius:50%;background:var(--brand)}
+.chapter{margin:46px 0 18px;padding:30px 28px;border-radius:22px;background:linear-gradient(135deg,#2a2370,#5b4be6);color:#fff}
+#partB.chapter{background:linear-gradient(135deg,#3b2f8f,#8b7cf6)}
+#partC.chapter{background:linear-gradient(135deg,#0b4b5c,#0e7490)}
+.chapter .kicker{font-size:14px;font-weight:700;opacity:.8}
+.chapter h1{font-size:clamp(24px,3.6vw,34px);font-weight:800;line-height:1.2;margin-top:4px}
+.chapter .lead{color:rgba(255,255,255,.86);margin:10px 0 0;max-width:none}
+.chapter .who{display:inline-block;margin-top:14px;font-size:13px;font-weight:700;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);padding:3px 12px;border-radius:20px}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px 24px 22px;margin-bottom:18px;box-shadow:0 1px 2px rgba(20,25,50,.04)}
+.step{display:flex;gap:16px;align-items:flex-start}
+.badge{flex:0 0 38px;height:38px;border-radius:50%;background:var(--brand);color:#fff;font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.body{flex:1;min-width:0}
+h2{font-size:clamp(18px,2.5vw,22px);font-weight:800;line-height:1.35;margin-bottom:8px}
+h2.sec{margin-bottom:14px}
+p{font-size:clamp(14.5px,1.9vw,16px);color:#3f4457;margin-top:6px}
+p.key{background:var(--brand-soft);border:1px solid var(--brand-line);border-radius:12px;padding:12px 14px;color:var(--ink)}
+.hint{color:var(--muted);font-size:14px}
+.urlbox{margin-top:12px;background:var(--brand-soft);border:1px solid var(--brand-line);border-radius:12px;padding:11px 14px;direction:ltr;text-align:left;font-size:14px;color:#3b3596;word-break:break-all;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.btn{display:inline-flex;align-items:center;gap:8px;margin-top:12px;background:var(--brand);color:#fff;text-decoration:none;font-weight:600;font-size:15px;padding:11px 20px;border-radius:12px}
+.btn:hover{background:var(--brand-d)}
+.urlrow{display:flex;gap:18px;align-items:center}
+.urlrow>div{flex:1;min-width:0}
+.qr{display:block;background:#fff}
+.qr.small{width:112px;height:112px;border:1px solid var(--line);border-radius:12px;padding:6px}
+.shot{margin-top:16px;border:1px solid var(--line);border-radius:14px;background:#fbfbfd;padding:10px}
+.frame{position:relative;width:100%;max-width:var(--mw,100%);margin:0 auto;border-radius:8px;overflow:visible;border:1px solid var(--line);background:#fff}
+.frame img{position:absolute;inset:0;width:100%;height:100%;display:block;border-radius:8px}
+.mk.l span{right:auto;left:-13px}
+.mk{position:absolute;border:2.5px solid var(--mark);border-radius:8px;box-shadow:0 0 0 3px rgba(255,90,54,.18)}
+.mk span{position:absolute;top:-13px;right:-13px;min-width:26px;height:26px;padding:0 6px;border-radius:13px;background:var(--mark);color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,.25);border:2px solid #fff}
+figcaption{font-size:12.5px;color:#8a8fa3;text-align:center;margin-top:8px}
+.legend{list-style:none;margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:6px 18px}
+.legend li{display:flex;gap:9px;align-items:flex-start;font-size:14.5px;color:#3f4457;line-height:1.5}
+.legend b{flex:0 0 24px;height:24px;border-radius:12px;background:var(--mark);color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.tip{margin-top:16px;background:var(--warn-bg);border:1px solid var(--warn-line);border-right:6px solid var(--warn);border-radius:12px;padding:12px 16px;font-size:15px;color:#3f4457}
+.tip .ttl{display:block;font-weight:800;color:var(--ink);margin-bottom:3px}
+.tip.warn{background:var(--red-bg);border-color:#f6c9cb;border-right-color:var(--red)}
+.tbl{width:100%;border-collapse:separate;border-spacing:0;margin-top:14px;font-size:15px;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.tbl th{background:#23204f;color:#fff;text-align:right;padding:9px 12px;font-weight:700}
+.tbl td{padding:8px 12px;border-top:1px solid var(--line);vertical-align:top;color:#3f4457}
+.tbl td:first-child{white-space:nowrap;width:120px;color:var(--ink)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
+.mini{border-radius:14px;padding:14px 16px;border:1px solid var(--line)}
+.mini h3{font-size:17px;font-weight:800;margin-bottom:6px}
+.mini ul{list-style:none}
+.mini li{font-size:15px;color:#3f4457;margin-top:6px;position:relative;padding-inline-start:20px}
+.mini li:before{content:'';position:absolute;right:0;top:9px;width:10px;height:10px;border-radius:3px}
+.mini.stop{background:var(--red-bg);border-color:#f6c9cb}.mini.stop li:before{background:var(--red)}
+.mini.go{background:var(--ok-bg);border-color:#b7ebcd}.mini.go li:before{background:var(--ok)}
+.apps{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px}
+.app{border:1px solid var(--line);border-radius:16px;padding:16px;text-align:center;background:#fbfbfd}
+.app .badge-img{height:44px;width:auto;display:block;margin:0 auto 12px}
+.app .qr{width:180px;height:180px;margin:0 auto;border:1px solid var(--line);border-radius:12px;padding:8px}
+.appname{display:flex;align-items:center;justify-content:center;gap:9px;margin-top:12px;font-weight:700}
+.appname img{width:38px;height:38px;border-radius:9px;border:1px solid var(--line)}
+.app a{display:inline-block;margin-top:8px;font-size:14px;font-weight:600;text-decoration:none}
+.nums{margin:10px 0 0;padding-inline-start:22px}
+.nums li{font-size:15.5px;color:#3f4457;margin-top:7px;padding-inline-start:4px}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:12px 0 4px}
+.flow span{background:#f0f1f6;border:1px solid var(--line);border-radius:20px;padding:4px 13px;font-size:14px;font-weight:600}
+.flow span.hl{background:var(--warn-bg);border-color:var(--warn-line)}
+.flow span.ok{background:var(--ok-bg);border-color:#b7ebcd;color:#067647}
+.flow i{font-style:normal;color:var(--muted)}
+.rules{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.rule{position:relative;border:1px solid var(--line);border-radius:14px;padding:14px 16px 14px 16px;padding-inline-start:52px;background:#fbfbfd}
+.rule>b{position:absolute;right:14px;top:14px;width:28px;height:28px;border-radius:50%;background:var(--brand-soft);color:var(--brand);display:flex;align-items:center;justify-content:center;font-size:14px}
+.rule h3{font-size:16px;font-weight:800}
+.rule p{font-size:14.5px;margin-top:4px}
+.rule .no{color:#b42318}.rule .yes{color:#067647}
+.helpgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.helpgrid>div{border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:#fbfbfd}
+.helpgrid b{font-size:16px}
+footer{text-align:center;color:#8a8fa3;font-size:13px;margin-top:30px;line-height:1.7}
+#pnav{display:none}
+@media (max-width:720px){.toc,.grid2,.apps,.rules,.helpgrid{grid-template-columns:1fr}.legend{grid-template-columns:1fr}.step{gap:10px}.badge{flex-basis:32px;height:32px;font-size:15px}.card{padding:18px 14px}.bar .links{display:none}.urlrow{flex-direction:column;align-items:flex-start}.mk span{min-width:20px;height:20px;font-size:11px;top:-10px;right:-10px}}
+/* presentation mode */
+body.present{background:#eef0f7}
+body.present .bar{display:none}
+body.present .wrap{max-width:1180px;padding:0 24px}
+body.present .slide{display:none;min-height:100vh;margin:0;padding:34px 40px;border-radius:0;border:0;box-shadow:none}
+body.present .slide.on{display:block}
+body.present .chapter.on{display:flex;flex-direction:column;justify-content:center;padding:60px 70px}
+body.present .chapter h1{font-size:54px}
+body.present .chapter .lead{font-size:24px}
+body.present .cover.on{display:block;padding-top:60px}
+body.present h2{font-size:30px}
+body.present p,body.present .legend li,body.present .tip,body.present .nums li,body.present .tbl{font-size:19px}
+body.present .shot{max-width:none}
+body.present .shot.tall{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(260px,1fr);gap:8px 22px;align-items:start}
+body.present .shot.tall .frame{grid-column:1;grid-row:1;max-width:min(100%,calc(70vh * var(--ar)))}
+body.present .shot.wide .frame{max-width:min(100%,calc(66vh * var(--ar)))}
+body.present .shot.wide .legend{grid-template-columns:repeat(3,1fr)}
+body.present .shot.tall figcaption{grid-column:1;grid-row:2}
+body.present .shot.tall .legend{grid-column:2;grid-row:1 / span 2;grid-template-columns:1fr;margin-top:0;align-self:center}
+body.present .legend li{font-size:17px}
+body.present footer{display:none}
+body.present #pnav{display:flex;position:fixed;bottom:16px;left:16px;gap:8px;align-items:center;z-index:30;background:#fff;border:1px solid var(--line);border-radius:14px;padding:6px 10px;box-shadow:0 6px 20px rgba(20,25,50,.12)}
+#pnav button{border:0;background:var(--brand-soft);color:var(--brand);font:inherit;font-weight:700;font-size:18px;min-width:40px;height:36px;border-radius:9px;cursor:pointer}
+#pnav #pexit{font-size:14px;padding:0 12px;background:#f0f1f6;color:var(--muted)}
+#pcount{font-size:14px;color:var(--muted);min-width:56px;text-align:center}
+@media print{
+ @page{size:A4;margin:12mm 11mm}
+ body{background:#fff}
+ .bar,#pnav{display:none!important}
+ .wrap{max-width:none;padding:0}
+ .shot,.tip,.rule,.mini,.app,.helpgrid>div,.legend li,.tbl tr{break-inside:avoid}
+ .card{break-inside:avoid}
+ .frame{max-width:min(100%,calc(92mm * var(--ar)))}
+ .cover{min-height:265mm;display:flex;flex-direction:column;justify-content:center;break-after:page}
+ .cover h1{font-size:40px}
+ .cover .lead{font-size:17px}
+ .tocc{font-size:18px;padding:20px}
+ .howto{font-size:16px}
+ .shot{padding:6px}
+ .app .qr{width:120px;height:120px}
+ .app{padding:10px}
+ .chapter{margin-top:0}
+ .legend li{font-size:12.5px}
+ p{font-size:13.5px}
+ h2{break-after:avoid}
+ .card{box-shadow:none}
+ .chapter{break-before:page;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ .mk,.mk span,.legend b,.badge,.tbl th,.tip,.mini,.flow span,p.key,.tocc,.chapter{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ .cover{padding-top:10px}
+ a.btn{display:none}
+}
+</style></head><body>
+<nav class="bar"><a href="#top" class="home"><i></i>מדריך עלייה לאוויר</a><div class="links"><a href="#partA">קלאודצ'אט</a><a href="#partB">אפליקציה</a><a href="#partC">פורטל</a></div><a class="pdf" href="cloudchat-golive-guide.pdf" download>הורדת PDF</a><button id="pres" type="button" title="מצב הצגה: שקף אחד בכל מסך, מעבר בחצים">מצב הצגה</button></nav>
+<div class="wrap">
+<header class="cover slide" id="top">
+  <div class="logo"><i></i>CloudChat · מדריך עלייה לאוויר</div>
+  <h1>הסוכן שלכם באוויר.<br>ככה עובדים איתו מהיום.</h1>
+  <p class="lead">מדריך אחד לכל הצוות: איך עונים ללקוחות בקלאודצ'אט, איך עוצרים את הסוכן כשנציג נכנס לשיחה, ואיך המנהלים רואים ומשפרים אותו בפורטל.</p>
+  <div class="toc">
+    <a href="#partA" class="tocc a"><span class="tag">לכל הנציגים</span><b>חלק א'</b>קלאודצ'אט: הלייב צ'אט<small>התחברות · שיחות · סטטוסים · העברה לנציג · עצירת הסוכן · התראות</small></a>
+    <a href="#partB" class="tocc b"><span class="tag">לכל הנציגים</span><b>חלק ב'</b>האפליקציה בנייד<small>הורדה · התחברות · התראות בטלפון</small></a>
+    <a href="#partC" class="tocc c"><span class="tag mgr">למנהלים בלבד</span><b>חלק ג'</b>הפורטל<small>שיחות · ההנחיות של הסוכן · משוב ושיפור</small></a>
+  </div>
+  <div class="howto">שני דברים שכדאי לזכור מהיום הראשון:
+    <ul><li><b>הסוכן עונה לבד</b>, עד שנציג נכנס לשיחה. נציג שכותב ללקוח עוצר את הסוכן אוטומטית בשיחה הזו (צעד 7).</li>
+    <li><b>כל טעות של הסוכן היא הזדמנות</b>. משוב קצר בפורטל הופך לשיפור אמיתי (צעד 18).</li></ul></div>
+</header><section class="chapter slide" id="partA"><div class="kicker">חלק א'</div><h1>קלאודצ'אט: איפה עונים ללקוחות</h1><p class="lead">כל שיחה עם לקוח, בוואטסאפ, באינסטגרם, בפייסבוק או באתר, מגיעה למסך אחד: הלייב צ'אט. כאן רואים מה הסוכן כתב, ומכאן נציג נכנס לשיחה כשצריך.</p><div class="who">לכל מי שעונה ללקוחות</div></section><section class="card slide " id="s1"><div class="step"><div class="badge">1</div><div class="body"><h2>נכנסים לקלאודצ'אט</h2>
+<p>נכנסים לכתובת למטה עם המייל והסיסמה שקיבלתם בהזמנה למערכת. מסמנים "זכור אותי" כדי לא להתחבר בכל פעם.</p>
+<div class="urlbox">https://console.thecloud.chat</div>
+<a class="btn" href="https://console.thecloud.chat/" target="_blank" rel="noopener">כניסה לקלאודצ'אט <span>&larr;</span></a>
+<figure class="shot tall" style="--mw:714px"><div class="frame" style="aspect-ratio:1.1915;--ar:1.1915"><img src="img/cc_login.png" alt="מסך הכניסה לקלאודצ'אט" loading="lazy"><div class="mk box" style="left:10.00%;top:34.89%;width:72.86%;height:11.91%"><span>1</span></div><div class="mk box" style="left:10.00%;top:56.60%;width:72.86%;height:11.91%"><span>2</span></div><div class="mk box" style="left:10.00%;top:80.43%;width:72.86%;height:10.43%"><span>3</span></div><div class="mk box" style="left:10.00%;top:71.06%;width:28.21%;height:6.38%"><span>4</span></div></div><figcaption>מסך הכניסה לקלאודצ'אט</figcaption><ol class="legend"><li><b>1</b><span>דואר אלקטרוני: המייל שאליו קיבלתם את ההזמנה.</span></li><li><b>2</b><span>הסיסמה שבחרתם.</span></li><li><b>3</b><span>התחבר.</span></li><li><b>4</b><span>שכחתם סיסמה? הקישור שולח מייל לאיפוס.</span></li></ol></figure>
+<div class="tip"><span class="ttl">עוד לא קיבלתם הזמנה?</span>מנהל החשבון שולח לכל נציג הזמנה במייל, מהגדרות סביבת העבודה. מקבלים מייל, לוחצים על הקישור, ובוחרים סיסמה.</div>
+</div></div></section><section class="card slide " id="s2"><div class="step"><div class="badge">2</div><div class="body"><h2>היכרות עם מסך הלייב צ'אט</h2>
+<p>אחרי הכניסה לוחצים למעלה על <b>"איזור הצ'אטים"</b>. זה המסך שבו עובדים כל היום. הוא בנוי מימין לשמאל, בדיוק בסדר שבו עובדים:</p>
+<figure class="shot wide" style="--mw:940px"><div class="frame" style="aspect-ratio:1.6744;--ar:1.6744"><img src="img/cc_overview.png" alt="מסך הלייב צ'אט. השמות והתוכן מטושטשים לצורך המדריך." loading="lazy"><div class="mk box" style="left:84.86%;top:6.28%;width:15.35%;height:16.05%"><span>1</span></div><div class="mk box" style="left:72.92%;top:15.23%;width:12.29%;height:13.72%"><span>2</span></div><div class="mk box" style="left:72.92%;top:33.95%;width:12.29%;height:49.30%"><span>3</span></div><div class="mk box" style="left:56.18%;top:11.40%;width:17.29%;height:88.95%"><span>4</span></div><div class="mk box" style="left:59.51%;top:6.74%;width:7.22%;height:4.42%"><span>5</span></div><div class="mk box" style="left:27.50%;top:11.40%;width:29.17%;height:63.14%"><span>6</span></div><div class="mk l" style="left:29.79%;top:6.74%;width:9.58%;height:4.65%"><span>7</span></div><div class="mk box" style="left:39.17%;top:6.16%;width:3.33%;height:5.70%"><span>8</span></div><div class="mk box" style="left:0.28%;top:77.56%;width:27.22%;height:14.77%"><span>9</span></div></div><figcaption>מסך הלייב צ'אט. השמות והתוכן מטושטשים לצורך המדריך.</figcaption><ol class="legend"><li><b>1</b><span>הערוצים: "שיחות" מציג הכול, ומתחתיו כל בוט או ערוץ בנפרד.</span></li><li><b>2</b><span>התיקיות שלי: "הוקצה לי" (השיחות שלי) ו"לא משויך" (שיחות שעוד אין להן נציג).</span></li><li><b>3</b><span>מצב: סינון לפי סטטוס השיחה. המספר ליד כל סטטוס הוא כמות השיחות בו.</span></li><li><b>4</b><span>רשימת השיחות, עם חיפוש לפי שם או טלפון. לחיצה על שיחה פותחת אותה.</span></li><li><b>5</b><span>"לא נענה": מציג רק שיחות שמחכות לתשובה.</span></li><li><b>6</b><span>השיחה עצמה: כל מה שהלקוח והסוכן כתבו.</span></li><li><b>7</b><span>כפתור הסטטוס: מעבירים את השיחה לסטטוס הבא (צעד 4).</span></li><li><b>8</b><span>הנציג המטפל: לחיצה מעבירה את השיחה לנציג אחר (צעד 5).</span></li><li><b>9</b><span>השהיית האוטומציה: עוצרת את הסוכן בשיחה הזו (צעד 6).</span></li></ol></figure>
+</div></div></section><section class="card slide " id="s3"><div class="step"><div class="badge">3</div><div class="body"><h2>רואים רק את מה שרלוונטי: סינון לפי סטטוס</h2>
+<p>בעמודת התיקיות בוחרים מה רואים ברשימה. לחיצה על תיקייה מסננת את הרשימה מיד.</p>
+<figure class="shot tall" style="--mw:347px"><div class="frame" style="aspect-ratio:0.5797;--ar:0.5797"><img src="img/cc_folders.png" alt="התיקיות והסטטוסים" loading="lazy"><div class="mk box" style="left:2.50%;top:11.16%;width:44.25%;height:6.38%"><span>1</span></div><div class="mk l" style="left:2.50%;top:16.38%;width:44.25%;height:11.88%"><span>2</span></div><div class="mk box" style="left:2.50%;top:34.49%;width:44.25%;height:61.45%"><span>3</span></div><div class="mk box" style="left:45.50%;top:0.00%;width:55.25%;height:20.00%"><span>4</span></div></div><figcaption>התיקיות והסטטוסים</figcaption><ol class="legend"><li><b>1</b><span>הכל: כל השיחות בערוץ שנבחר.</span></li><li><b>2</b><span>הוקצה לי: השיחות שלי. לא משויך: שיחות שאף נציג עוד לא לקח.</span></li><li><b>3</b><span>מצב: כל שיחה נמצאת בסטטוס אחד, ואפשר לסנן לפיו.</span></li><li><b>4</b><span>בחירת ערוץ או בוט מצמצמת את כל התיקיות אליו.</span></li></ol></figure>
+<table class="tbl">
+<tr><th>סטטוס</th><th>מה זה אומר</th></tr>
+<tr><td><b>פתח</b></td><td>שיחה פעילה שמחכה לטיפול. כאן מתחילים כל בוקר.</td></tr>
+<tr><td><b>ממתין</b></td><td>השיחה עדיין חיה, אבל מחכים למשהו: תשובה מהלקוח, בדיקה פנימית, או טיפול של נציג.</td></tr>
+<tr><td><b>הסתיים</b></td><td>הטיפול נגמר. השיחה יורדת מהרשימה הפעילה ונשמרת בהיסטוריה.</td></tr>
+<tr><td><b>נודניק</b></td><td>שיחה שהוסתרה לזמן קצוב, וחוזרת לבד בזמן שנבחר.</td></tr>
+<tr><td><b>ספאם / לא חוקי</b></td><td>הודעות זבל או פניות לא רלוונטיות. מעבירים לכאן כדי לנקות את הרשימה.</td></tr>
+<tr><td><b>לא נקרא</b></td><td>שיחות עם הודעות שאף אחד עוד לא פתח.</td></tr>
+<tr><td><b>בוטל מנוי</b></td><td>לקוחות שביקשו לא לקבל הודעות.</td></tr>
+</table>
+</div></div></section><section class="card slide " id="s4"><div class="step"><div class="badge">4</div><div class="body"><h2>מחליפים סטטוס לשיחה</h2>
+<p>בראש השיחה יש כפתור ירוק. <b>לחיצה עליו</b> מעבירה את השיחה לשלב הבא (למשל "הזז אל הסתיים"). <b>החץ שלידו</b> פותח את כל האפשרויות.</p>
+<figure class="shot tall" style="--mw:410px"><div class="frame" style="aspect-ratio:0.6835;--ar:0.6835"><img src="img/cc_status.png" alt="תפריט הסטטוס של שיחה" loading="lazy"><div class="mk box" style="left:29.81%;top:0.76%;width:20.56%;height:5.06%"><span>1</span></div><div class="mk box" style="left:24.81%;top:0.76%;width:6.48%;height:5.06%"><span>2</span></div><div class="mk box" style="left:3.52%;top:11.65%;width:45.93%;height:18.23%"><span>3</span></div><div class="mk box" style="left:3.52%;top:30.89%;width:45.93%;height:14.68%"><span>4</span></div></div><figcaption>תפריט הסטטוס של שיחה</figcaption><ol class="legend"><li><b>1</b><span>הפעולה הבאה בלחיצה אחת.</span></li><li><b>2</b><span>החץ: כל הסטטוסים.</span></li><li><b>3</b><span>העברה לסטטוס אחר: פתח, ספאם, לא חוקי, הסתיים. "עם הערות סיכום" מוסיף סיכום קצר לשיחה.</span></li><li><b>4</b><span>נודניק: מסתירים את השיחה ל 20 דקות, שעה, 3 שעות או לשעה שבוחרים. היא תחזור לבד.</span></li></ol></figure>
+<div class="tip"><span class="ttl">כלל אצבע</span>סיימתם לטפל? מעבירים ל"הסתיים". מחכים ללקוח או לבדיקה? "ממתין". כך הרשימה של "פתח" תמיד מראה רק את מה שבאמת דורש מענה.</div>
+</div></div></section><section class="card slide " id="s5"><div class="step"><div class="badge">5</div><div class="body"><h2>מעבירים שיחה לנציג אחר</h2>
+<p>לוחצים על העיגול של הנציג בראש השיחה, ובוחרים למי להעביר. השיחה עוברת לתיקייה "הוקצה לי" של הנציג שנבחר.</p>
+<figure class="shot tall" style="--mw:356px"><div class="frame" style="aspect-ratio:0.5949;--ar:0.5949"><img src="img/cc_assign.png" alt="תפריט ההקצאה. שמות הנציגים מטושטשים לצורך המדריך." loading="lazy"><div class="mk box" style="left:43.40%;top:0.13%;width:10.21%;height:6.20%"><span>1</span></div><div class="mk box" style="left:4.26%;top:11.90%;width:47.23%;height:6.58%"><span>2</span></div><div class="mk box" style="left:4.26%;top:20.76%;width:47.23%;height:5.06%"><span>3</span></div><div class="mk box" style="left:11.91%;top:27.09%;width:31.91%;height:4.81%"><span>4</span></div><div class="mk box" style="left:3.40%;top:32.78%;width:49.57%;height:64.94%"><span>5</span></div></div><figcaption>תפריט ההקצאה. שמות הנציגים מטושטשים לצורך המדריך.</figcaption><ol class="legend"><li><b>1</b><span>העיגול של הנציג המטפל כרגע. לחיצה פותחת את התפריט.</span></li><li><b>2</b><span>חיפוש נציג לפי שם.</span></li><li><b>3</b><span>"אין": מחזיר את השיחה ל"לא משויך".</span></li><li><b>4</b><span>נציג בודד, או קבוצת סוכנים (למשל מכירות או שירות).</span></li><li><b>5</b><span>רשימת הנציגים. "באינטרנט" מסמן מי מחובר עכשיו.</span></li></ol></figure>
+</div></div></section><section class="card slide " id="s6"><div class="step"><div class="badge">6</div><div class="body"><h2>עוצרים את הסוכן בשיחה (השהיית אוטומציה)</h2>
+<p class="key"><b>זה הכפתור הכי חשוב במדריך.</b> כל עוד השיחה במצב "אוטומטית", <b>הסוכן החכם עונה ללקוח לבד</b>. כשנציג רוצה לנהל את השיחה בעצמו, משהים את האוטומציה, והסוכן מפסיק לענות בשיחה הזו בלבד. כל שאר השיחות ממשיכות כרגיל.</p>
+<p>הכפתור נמצא בפאנל הלקוח, בצד שמאל של המסך, תחת "השהה אוטומציה".</p>
+<figure class="shot tall" style="--mw:471px"><div class="frame" style="aspect-ratio:0.7857;--ar:0.7857"><img src="img/cc_pause_menu.png" alt="השהיית אוטומציה, לפני ההשהיה" loading="lazy"><div class="mk box" style="left:10.45%;top:73.93%;width:21.14%;height:7.14%"><span>1</span></div><div class="mk l" style="left:4.09%;top:73.93%;width:8.18%;height:7.14%"><span>2</span></div><div class="mk box" style="left:5.45%;top:1.79%;width:22.50%;height:71.43%"><span>3</span></div><div class="mk box" style="left:0.91%;top:82.32%;width:89.09%;height:8.57%"><span>4</span></div></div><figcaption>השהיית אוטומציה, לפני ההשהיה</figcaption><ol class="legend"><li><b>1</b><span>לחיצה על "+ 30 דקות": הסוכן עוצר ל 30 דקות.</span></li><li><b>2</b><span>החץ: בחירת זמן אחר.</span></li><li><b>3</b><span>משך ההשהיה: מ 5 דקות ועד שנה.</span></li><li><b>4</b><span>"אוטומטית": הסוכן פעיל ועונה בשיחה הזו.</span></li></ol></figure>
+<p>אחרי ההשהיה, השורה התחתונה מתחלפת בשעון שסופר לאחור. כשהזמן נגמר, הסוכן חוזר לענות לבד.</p>
+<figure class="shot wide" style="--mw:940px"><div class="frame" style="aspect-ratio:2.9333;--ar:2.9333"><img src="img/cc_paused.png" alt="השיחה מושהית: הסוכן לא עונה עד שהשעון יגיע לאפס" loading="lazy"><div class="mk box" style="left:9.32%;top:51.33%;width:80.68%;height:30.67%"><span>1</span></div><div class="mk box" style="left:1.14%;top:51.33%;width:10.00%;height:30.67%"><span>2</span></div></div><figcaption>השיחה מושהית: הסוכן לא עונה עד שהשעון יגיע לאפס</figcaption><ol class="legend"><li><b>1</b><span>הזמן שנשאר עד שהסוכן חוזר.</span></li><li><b>2</b><span>האיקס: מחזיר את הסוכן לפעולה עכשיו, בלי לחכות.</span></li></ol></figure>
+</div></div></section><section class="card slide " id="s7"><div class="step"><div class="badge">7</div><div class="body"><h2>מה עוצר את הסוכן, ומה מפעיל אותו מחדש</h2>
+<div class="grid2">
+  <div class="mini stop"><h3>הסוכן עוצר כש...</h3><ul>
+    <li><b>נציג שולח הודעה ללקוח</b> מהלייב צ'אט. הסוכן מושהה אוטומטית בשיחה הזו, לפי ברירת המחדל ל 30 דקות.</li>
+    <li>נציג לוחץ <b>"השהה אוטומציה"</b> ובוחר זמן.</li></ul></div>
+  <div class="mini go"><h3>הסוכן חוזר כש...</h3><ul>
+    <li><b>זמן ההשהיה נגמר.</b> השעון מגיע לאפס והסוכן ממשיך לענות.</li>
+    <li>נציג לוחץ על <b>האיקס</b> ליד השעון.</li></ul></div>
+</div>
+<div class="tip warn"><span class="ttl">חשוב: נכנסתם לשיחה? הסוכן לא יפריע</span>ברגע שכתבתם ללקוח, הסוכן שותק ל 30 דקות כדי לא לענות במקביל אליכם. צריכים יותר זמן? בוחרים השהיה ארוכה יותר מהחץ. סיימתם והלקוח יכול לחזור לסוכן? לוחצים על האיקס.</div>
+<div class="tip"><span class="ttl">רוצים לכתוב משהו לצוות בלי שהלקוח יראה?</span>בתחתית השיחה בוחרים בלשונית "הערה" במקום "תגובה". הערה נשמרת בשיחה ונראית רק לצוות, ולא נשלחת ללקוח.</div>
+</div></div></section><section class="card slide " id="s8"><div class="step"><div class="badge">8</div><div class="body"><h2>הלקוח לא כתב 24 שעות? שולחים תבנית</h2>
+<p>בוואטסאפ אפשר לכתוב חופשי ללקוח רק בתוך 24 שעות מההודעה האחרונה שלו. אחרי זה הוואטסאפ מאפשר רק הודעת תבנית מאושרת. קלאודצ'אט מראה את זה בבירור:</p>
+<figure class="shot tall" style="--mw:830px"><div class="frame" style="aspect-ratio:1.3833;--ar:1.3833"><img src="img/cc_template.png" alt="חלון 24 השעות נסגר" loading="lazy"><div class="mk box" style="left:-0.72%;top:40.67%;width:100.96%;height:12.33%"><span>1</span></div><div class="mk box" style="left:36.87%;top:63.67%;width:44.10%;height:13.33%"><span>2</span></div><div class="mk box" style="left:64.10%;top:82.00%;width:35.66%;height:17.67%"><span>3</span></div></div><figcaption>חלון 24 השעות נסגר</figcaption><ol class="legend"><li><b>1</b><span>"נדרשת תבנית": החלון נסגר, אי אפשר לכתוב חופשי.</span></li><li><b>2</b><span>"אני רוצה לשלוח הודעת תבנית": בוחרים תבנית מאושרת ושולחים.</span></li><li><b>3</b><span>תגובה נשלחת ללקוח. הערה נשארת פנימית לצוות.</span></li></ol></figure>
+<p class="hint">כשהלקוח עונה לתבנית, החלון נפתח מחדש ל 24 שעות, ואפשר שוב לכתוב חופשי.</p>
+</div></div></section><section class="card slide " id="s9"><div class="step"><div class="badge">9</div><div class="body"><h2>מסמנים אם אתם זמינים</h2>
+<p>לוחצים על התמונה שלכם בפינה השמאלית העליונה. נקודה ירוקה אומרת שאתם מחוברים וזמינים. יוצאים להפסקה או מסיימים יום? בוחרים "הגדר את עצמך בתור רחוק", כדי ששיחות חדשות לא יגיעו אליכם.</p>
+<figure class="shot tall" style="--mw:393px"><div class="frame" style="aspect-ratio:0.6562;--ar:0.6562"><img src="img/cc_profile.png" alt="תפריט הנציג" loading="lazy"><div class="mk box" style="left:13.33%;top:0.00%;width:16.19%;height:8.12%"><span>1</span></div><div class="mk box" style="left:3.81%;top:18.12%;width:55.48%;height:5.94%"><span>2</span></div></div><figcaption>תפריט הנציג</figcaption><ol class="legend"><li><b>1</b><span>התמונה שלכם. הנקודה הירוקה: מחוברים.</span></li><li><b>2</b><span>"הגדר את עצמך בתור רחוק": לא זמינים כרגע.</span></li></ol></figure>
+</div></div></section><section class="card slide " id="s10"><div class="step"><div class="badge">10</div><div class="body"><h2>מפעילים התראות בדסקטופ</h2>
+<p>כדי לשמוע ולראות כל שיחה חדשה גם כשאתם בחלון אחר. עושים את זה <b>פעם אחת בכל מחשב</b>, בדפדפן שבו עובדים.</p>
+<figure class="shot wide" style="--mw:940px"><div class="frame" style="aspect-ratio:1.7866;--ar:1.7866"><img src="img/cc_notif.png" alt="הגדרות איזור הצ'אטים" loading="lazy"><div class="mk box" style="left:95.42%;top:56.70%;width:4.72%;height:5.96%"><span>1</span></div><div class="mk box" style="left:80.42%;top:20.84%;width:15.28%;height:6.20%"><span>2</span></div><div class="mk box" style="left:54.58%;top:72.21%;width:24.86%;height:16.50%"><span>3</span></div><div class="mk box" style="left:49.17%;top:76.18%;width:2.78%;height:8.19%"><span>4</span></div><div class="mk box" style="left:47.78%;top:89.58%;width:5.56%;height:5.96%"><span>5</span></div></div><figcaption>הגדרות איזור הצ'אטים</figcaption><ol class="legend"><li><b>1</b><span>גלגל השיניים בתפריט הימני (הגדרות).</span></li><li><b>2</b><span>"איזור הצ'אטים".</span></li><li><b>3</b><span>גוללים לתחתית העמוד, לקטע "התראות צ'אט בשולחן העבודה".</span></li><li><b>4</b><span>מסמנים "שיחה שהוקצתה לי" ו"משיחה בתיקיית לא מוקצים". "השתק קול" נשאר לא מסומן.</span></li><li><b>5</b><span>שמור.</span></li></ol></figure>
+<div class="tip"><span class="ttl">הדפדפן שואל "לאפשר התראות?"</span>לוחצים <b>"אפשר"</b>. לא נשאלתם, או שההתראות לא מגיעות? פותחים את הגדרות האתר בדפדפן (המנעול ליד הכתובת) ומפעילים "התראות" עבור console.thecloud.chat. ההתראות מגיעות כל עוד קלאודצ'אט פתוח בלשונית, גם ברקע.</div>
+</div></div></section><section class="chapter slide" id="partB"><div class="kicker">חלק ב'</div><h1>האפליקציה בנייד</h1><p class="lead">אותו לייב צ'אט, בכיס. עונים ללקוחות, מעבירים שיחות ומקבלים התראות גם כשלא ליד המחשב.</p><div class="who">לכל מי שעונה ללקוחות</div></section><section class="card slide " id="s11"><div class="step"><div class="badge">11</div><div class="body"><h2>מורידים את האפליקציה</h2>
+<p>סורקים את הברקוד עם המצלמה של הטלפון, או מחפשים בחנות <b>"chatbot live chat"</b>.</p>
+<div class="apps">
+  <div class="app"><img class="badge-img" src="img/badge_appstore.png" alt="App Store"><img class="qr" src="img/qr_ios.svg" alt="ברקוד להורדה מ App Store"><div class="appname"><img src="img/icon_ios.png" alt="">אייפון</div><a href="https://apps.apple.com/il/app/chatbot-live-chat/id1627218767" target="_blank" rel="noopener">לפתיחה בחנות &larr;</a></div>
+  <div class="app"><img class="badge-img" src="img/badge_gplay.png" alt="Google Play"><img class="qr" src="img/qr_android.svg" alt="ברקוד להורדה מ Google Play"><div class="appname"><img src="img/icon_android.png" alt="">אנדרואיד</div><a href="https://play.google.com/store/apps/details?id=com.dfktv2.chatbot" target="_blank" rel="noopener">לפתיחה בחנות &larr;</a></div>
+</div>
+<p class="hint">שימו לב לאייקון: באייפון ובאנדרואיד האפליקציה נראית אחרת, אבל זו אותה מערכת.</p>
+</div></div></section><section class="card slide " id="s12"><div class="step"><div class="badge">12</div><div class="body"><h2>מתחברים ומפעילים התראות בטלפון</h2>
+<ol class="nums">
+<li>פותחים את האפליקציה ומתחברים <b>עם אותו מייל ואותה סיסמה</b> של קלאודצ'אט במחשב.</li>
+<li>כשהטלפון שואל אם לאפשר התראות, לוחצים <b>"אפשר"</b>. בלי זה לא תדעו על שיחה חדשה.</li>
+<li>בוחרים את סביבת העבודה של העסק, ונכנסים לשיחות. התיקיות, הסטטוסים, ההעברה לנציג וההשהיה עובדים בדיוק כמו במחשב.</li>
+</ol>
+<div class="tip"><span class="ttl">לא מקבלים התראות בנייד?</span>בהגדרות הטלפון, תחת האפליקציה, בודקים שההתראות מופעלות ושהאפליקציה לא במצב חיסכון בסוללה.</div></div></div></section><section class="chapter slide" id="partC"><div class="kicker">חלק ג'</div><h1>הפורטל: רואים את הסוכן, ומשפרים אותו</h1><p class="lead">בפורטל רואים כל שיחה של הסוכן, את ההנחיות שלפיהן הוא עובד, ונותנים משוב שהופך לשיפור. הלקוחות לא רואים את הפורטל.</p><div class="who">למנהלים בלבד</div></section><section class="card slide " id="s13"><div class="step"><div class="badge">13</div><div class="body"><h2>נכנסים לפורטל</h2>
+<p>עם שם המשתמש והסיסמה שקיבלתם מאיתנו.</p>
+<div class="urlrow"><div><div class="urlbox">https://portal.cloudchat.co.il/portal/login</div>
+<a class="btn" href="https://portal.cloudchat.co.il/portal/login" target="_blank" rel="noopener">כניסה לפורטל <span>&larr;</span></a></div>
+<img class="qr small" src="img/qr_portal.svg" alt="ברקוד לפורטל"></div>
+<figure class="shot tall" style="--mw:685px"><div class="frame" style="aspect-ratio:1.1429;--ar:1.1429"><img src="img/p_login.png" alt="מסך הכניסה לפורטל" loading="lazy"><div class="mk box" style="left:7.29%;top:33.10%;width:85.00%;height:11.43%"><span>1</span></div><div class="mk box" style="left:7.29%;top:53.10%;width:85.00%;height:11.43%"><span>2</span></div><div class="mk box" style="left:7.29%;top:64.52%;width:18.12%;height:8.57%"><span>3</span></div><div class="mk box" style="left:7.29%;top:75.00%;width:85.00%;height:13.33%"><span>4</span></div></div><figcaption>מסך הכניסה לפורטל</figcaption><ol class="legend"><li><b>1</b><span>שם משתמש.</span></li><li><b>2</b><span>סיסמה.</span></li><li><b>3</b><span>שכחתי סיסמה: שולח קישור לאיפוס.</span></li><li><b>4</b><span>התחברות.</span></li></ol></figure>
+</div></div></section><section class="card slide " id="s14"><div class="step"><div class="badge">14</div><div class="body"><h2>הדשבורד: תמונת מצב בשנייה</h2>
+<p>המסך הראשון אחרי הכניסה. כמה פניות פתוחות, כמה הסוכן סגר לבד, וכמה זמן לוקח לסגור פנייה.</p>
+<figure class="shot wide" style="--mw:940px"><div class="frame" style="aspect-ratio:1.6744;--ar:1.6744"><img src="img/p_dash.png" alt="הדשבורד (צילום ממערכת הדגמה)" loading="lazy"><div class="mk box" style="left:81.74%;top:8.37%;width:17.71%;height:30.00%"><span>1</span></div><div class="mk box" style="left:2.99%;top:27.21%;width:76.18%;height:5.58%"><span>2</span></div><div class="mk box" style="left:2.99%;top:34.19%;width:76.18%;height:25.47%"><span>3</span></div><div class="mk box" style="left:11.04%;top:1.16%;width:7.01%;height:4.65%"><span>4</span></div></div><figcaption>הדשבורד (צילום ממערכת הדגמה)</figcaption><ol class="legend"><li><b>1</b><span>התפריט: דשבורד, שיחות, משוב, הסוכן שלי ועוד.</span></li><li><b>2</b><span>סינון לפי מטפל, נציג, סוג פנייה וסטטוס.</span></li><li><b>3</b><span>המדדים המרכזיים. העכבר על ה i מסביר כל מדד.</span></li><li><b>4</b><span>החלפת שפה לאנגלית.</span></li></ol></figure>
+</div></div></section><section class="card slide " id="s15"><div class="step"><div class="badge">15</div><div class="body"><h2>רואים את השיחות</h2>
+<p>בתפריט: <b>"שיחות"</b>. כל שיחה של הסוכן, בזמן אמת.</p>
+<figure class="shot wide" style="--mw:940px"><div class="frame" style="aspect-ratio:1.8000;--ar:1.8000"><img src="img/p_convs.png" alt="מסך השיחות: הרשימה מימין, השיחה הנבחרת משמאל" loading="lazy"><div class="mk box" style="left:57.01%;top:10.12%;width:21.25%;height:6.00%"><span>1</span></div><div class="mk box" style="left:57.01%;top:16.62%;width:21.25%;height:6.88%"><span>2</span></div><div class="mk box" style="left:54.72%;top:85.38%;width:23.82%;height:7.50%"><span>3</span></div><div class="mk box" style="left:13.12%;top:11.75%;width:3.33%;height:6.00%"><span>4</span></div><div class="mk box" style="left:6.46%;top:11.75%;width:3.33%;height:6.00%"><span>5</span></div><div class="mk box" style="left:14.58%;top:38.12%;width:2.71%;height:4.88%"><span>6</span></div><div class="mk box" style="left:3.12%;top:11.75%;width:3.33%;height:6.00%"><span>7</span></div></div><figcaption>מסך השיחות: הרשימה מימין, השיחה הנבחרת משמאל</figcaption><ol class="legend"><li><b>1</b><span>חיפוש לפי שם, טלפון, טקסט או מספר.</span></li><li><b>2</b><span>סינון: הכל, פתוחה, אצל נציג, סגורה.</span></li><li><b>3</b><span>לחיצה על שיחה פותחת אותה.</span></li><li><b>4</b><span>פתיחת השיחה בקלאודצ'אט, כדי לענות ללקוח.</span></li><li><b>5</b><span>משוב על השיחה (צעד 18).</span></li><li><b>6</b><span>היד הקטנה ליד הודעה של הסוכן: משוב על ההודעה הזו בדיוק.</span></li><li><b>7</b><span>פרטי הלקוח והפניות שלו.</span></li></ol></figure>
+</div></div></section><section class="card slide " id="s16"><div class="step"><div class="badge">16</div><div class="body"><h2>רואים את ההנחיות של הסוכן</h2>
+<p>בתפריט: <b>"הסוכן שלי"</b>. כאן כתוב איך הסוכן חושב ומה הוא יודע.</p>
+<figure class="shot wide" style="--mw:940px"><div class="frame" style="aspect-ratio:1.6744;--ar:1.6744"><img src="img/p_agent_map.png" alt="מפת הסוכן: כל ספרי ההנחיות במבט אחד" loading="lazy"><div class="mk box" style="left:81.46%;top:7.44%;width:13.26%;height:4.77%"><span>1</span></div><div class="mk box" style="left:81.46%;top:15.58%;width:13.26%;height:4.77%"><span>2</span></div><div class="mk box" style="left:81.46%;top:19.65%;width:13.26%;height:8.84%"><span>3</span></div><div class="mk box" style="left:81.46%;top:31.74%;width:13.26%;height:4.77%"><span>4</span></div><div class="mk box" style="left:41.39%;top:48.02%;width:18.61%;height:15.12%"><span>5</span></div></div><figcaption>מפת הסוכן: כל ספרי ההנחיות במבט אחד</figcaption><ol class="legend"><li><b>1</b><span>מפת הסוכן: כרטיס לכל נושא שהסוכן מטפל בו.</span></li><li><b>2</b><span>פרסונה: השם, הסגנון ואופן הדיבור.</span></li><li><b>3</b><span>מידע על העסק ומאגר הידע: העובדות שהסוכן עונה לפיהן.</span></li><li><b>4</b><span>בדיקת הסוכן: צ'אט ניסיון, בלי לקוחות אמיתיים.</span></li><li><b>5</b><span>לחיצה על כרטיס פותחת את ההנחיה המלאה.</span></li></ol></figure>
+<p>כל כרטיס הוא "ספר הנחיות": מתי הוא חל, מה הסוכן עושה, ומה אסור לו. כך זה נראה:</p>
+<figure class="shot tall" style="--mw:502px"><div class="frame" style="aspect-ratio:0.8372;--ar:0.8372"><img src="img/p_playbook.png" alt="ספר הנחיות פתוח (דוגמה)" loading="lazy"><div class="mk box" style="left:4.44%;top:31.74%;width:51.39%;height:41.86%"><span>1</span></div><div class="mk box" style="left:42.50%;top:93.49%;width:15.69%;height:5.58%"><span>2</span></div></div><figcaption>ספר הנחיות פתוח (דוגמה)</figcaption><ol class="legend"><li><b>1</b><span>ההנחיה עצמה, במילים פשוטות.</span></li><li><b>2</b><span>עריכה, למי שיש הרשאה.</span></li></ol></figure>
+<div class="tip"><span class="ttl">רוצים לשנות הנחיה?</span>הדרך הכי בטוחה היא משוב (צעד 18): כותבים מה צריך להשתנות, ואנחנו מכינים הצעה מדויקת שאתם מאשרים. כך שום שינוי לא נכנס לסוכן החי בלי בדיקה.</div>
+</div></div></section><section class="card slide " id="s17"><div class="step"><div class="badge">17</div><div class="body"><h2>הפרסונה: איך הסוכן מדבר</h2>
+<figure class="shot wide" style="--mw:940px"><div class="frame" style="aspect-ratio:1.8000;--ar:1.8000"><img src="img/p_persona.png" alt="מסך הפרסונה" loading="lazy"><div class="mk box" style="left:4.72%;top:37.75%;width:72.71%;height:6.00%"><span>1</span></div><div class="mk box" style="left:4.72%;top:60.88%;width:72.71%;height:33.50%"><span>2</span></div><div class="mk box" style="left:6.60%;top:9.75%;width:8.82%;height:5.00%"><span>3</span></div><div class="mk box" style="left:3.33%;top:9.88%;width:2.64%;height:4.75%"><span>4</span></div></div><figcaption>מסך הפרסונה</figcaption><ol class="legend"><li><b>1</b><span>שם הסוכן, בעברית ובאנגלית.</span></li><li><b>2</b><span>אופי הסוכן: הסגנון שבו הוא כותב, עם דוגמה לכל סגנון.</span></li><li><b>3</b><span>בדיקת הסוכן: לנסות איך זה נשמע לפני שמשנים.</span></li><li><b>4</b><span>היסטוריית גרסאות: כל שמירה נשמרת, ואפשר לשחזר.</span></li></ol></figure>
+</div></div></section><section class="card slide " id="s18"><div class="step"><div class="badge">18</div><div class="body"><h2>נותנים משוב על שיחה</h2>
+<p class="key">שלושים שניות לשיחה. <b>המשוב הוא הדרך שלנו לדעת מה הסוכן פספס</b>, וממנו נבנה השיפור שלו.</p>
+<ol class="nums">
+<li>פותחים את השיחה במסך "שיחות" (צעד 15).</li>
+<li>לוחצים על <b>היד הקטנה</b> ליד ההודעה של הסוכן שפספסה. הטופס נפתח כשהוא כבר מסומן להודעה הזו. אפשר גם ללחוץ על כפתור המשוב בראש השיחה.</li>
+<li>ממלאים את הטופס ולוחצים <b>"שליחת משוב"</b>.</li>
+</ol>
+<figure class="shot tall" style="--mw:578px"><div class="frame" style="aspect-ratio:0.9643;--ar:0.9643"><img src="img/p_fb_form.png" alt="טופס המשוב, עם דוגמה למשוב טוב" loading="lazy"><div class="mk box" style="left:50.74%;top:25.89%;width:42.96%;height:8.57%"><span>1</span></div><div class="mk box" style="left:6.30%;top:25.89%;width:42.96%;height:8.57%"><span>2</span></div><div class="mk box" style="left:6.30%;top:40.89%;width:87.41%;height:8.57%"><span>3</span></div><div class="mk box" style="left:6.30%;top:55.89%;width:87.41%;height:26.79%"><span>4</span></div><div class="mk box" style="left:6.30%;top:86.96%;width:29.07%;height:8.57%"><span>5</span></div></div><figcaption>טופס המשוב, עם דוגמה למשוב טוב</figcaption><ol class="legend"><li><b>1</b><span>סוג הבעיה: תשובה לא נכונה, טון, חסר ידע, בעיה בחיבור, אחר.</span></li><li><b>2</b><span>חומרה: נמוכה, בינונית או גבוהה.</span></li><li><b>3</b><span>מתייחס ל: ההודעה המדויקת שפספסה.</span></li><li><b>4</b><span>מה היה לא בסדר, ומה הייתה התשובה הנכונה.</span></li><li><b>5</b><span>שליחת משוב.</span></li></ol></figure>
+<div class="tip"><span class="ttl">המשוב לא נשלח ללקוח</span>הוא נשמר בחשבון שלכם, ולא משנה את הסוכן עד שתאשרו את השיפור.</div>
+</div></div></section><section class="card slide " id="s19"><div class="step"><div class="badge">19</div><div class="body"><h2>עוקבים אחרי המשוב ומאשרים שיפור</h2>
+<p>בתפריט: <b>"משוב"</b>. כל משוב מקבל סטטוס, ורואים בדיוק איפה הוא עומד:</p>
+<div class="flow"><span>חדש</span><i>&larr;</i><span>נותח</span><i>&larr;</i><span class="hl">הצעה ממתינה</span><i>&larr;</i><span>אושר</span><i>&larr;</i><span class="ok">הוחל</span></div>
+<figure class="shot wide" style="--mw:940px"><div class="frame" style="aspect-ratio:3.8919;--ar:3.8919"><img src="img/p_feedback.png" alt="רשימת המשובים" loading="lazy"><div class="mk box" style="left:31.87%;top:32.97%;width:47.29%;height:14.86%"><span>1</span></div><div class="mk box" style="left:1.94%;top:59.19%;width:77.22%;height:12.97%"><span>2</span></div><div class="mk box" style="left:2.01%;top:84.59%;width:77.08%;height:10.27%"><span>3</span></div></div><figcaption>רשימת המשובים</figcaption><ol class="legend"><li><b>1</b><span>לשוניות לפי סטטוס, עם מספר המשובים בכל אחד.</span></li><li><b>2</b><span>סינון לפי סוג וחומרה, וחיפוש בטקסט.</span></li><li><b>3</b><span>לחיצה על שורה פותחת את המשוב.</span></li></ol></figure>
+<p>כשהמשוב נותח, מופיעה <b>הצעה לשיפור</b>: מה בדיוק ישתנה בהנחיה, אדום מה יוצא וירוק מה נכנס.</p>
+<figure class="shot tall" style="--mw:615px"><div class="frame" style="aspect-ratio:1.0253;--ar:1.0253"><img src="img/p_fb_item.png" alt="הצעה לשיפור שממתינה לאישור" loading="lazy"><div class="mk box" style="left:79.59%;top:11.38%;width:16.16%;height:4.49%"><span>1</span></div><div class="mk box" style="left:6.85%;top:68.26%;width:86.30%;height:10.67%"><span>2</span></div><div class="mk box" style="left:4.52%;top:89.33%;width:15.48%;height:6.74%"><span>3</span></div><div class="mk box" style="left:20.00%;top:89.33%;width:15.21%;height:6.74%"><span>4</span></div><div class="mk box" style="left:87.81%;top:34.27%;width:7.95%;height:4.21%"><span>5</span></div></div><figcaption>הצעה לשיפור שממתינה לאישור</figcaption><ol class="legend"><li><b>1</b><span>הסטטוס של המשוב.</span></li><li><b>2</b><span>השינוי המוצע: אדום יוצא, ירוק נכנס.</span></li><li><b>3</b><span>אישור: השינוי נרשם ונכנס לסוכן אחרי פרסום.</span></li><li><b>4</b><span>דחייה, עם סיבה. אפשר לפתוח שוב בכל רגע.</span></li><li><b>5</b><span>פתיחת השיחה המקורית.</span></li></ol></figure>
+</div></div></section><section class="card slide" id="tips"><h2 class="sec">איך כותבים משוב שבאמת משפר</h2>
+<div class="rules">
+<div class="rule"><b>1</b><h3>כותבים מה היה חסר, לא "לא טוב"</h3><p>עובדה, שם, מספר.</p><p class="no"><b>לא:</b> "התשובה לא טובה."</p><p class="yes"><b>כן:</b> "הסוכן אמר שאין חניה ליד הסניף. יש חניון בחינם מול הכניסה."</p></div>
+<div class="rule"><b>2</b><h3>מסמנים את ההודעה המדויקת</h3><p>היד הקטנה ליד ההודעה, או השדה "מתייחס ל". כך אנחנו יודעים לאיזה שלב בשיחה הכוונה.</p></div>
+<div class="rule"><b>3</b><h3>כותבים את התשובה הנכונה</h3><p>אם אתם יודעים אותה, כתבו אותה. כך המשוב הופך לידע חדש בסוכן ולא רק לתלונה.</p><p class="yes"><b>כן:</b> "משלוח לאילת לוקח 3 ימי עסקים, לא יום אחד."</p></div>
+<div class="rule"><b>4</b><h3>חומרה לפי הנזק ללקוח</h3><p><b>גבוהה:</b> מידע שגוי, מחיר, לקוח תקוע או מפספס הזמנה. <b>בינונית:</b> מידע חסר, תשובה חלקית. <b>נמוכה:</b> טון, אורך, ניסוח.</p></div>
+<div class="rule"><b>5</b><h3>בעיה אחת למשוב אחד</h3><p>שלוש בעיות בהודעה אחת נקראות כתלונה כללית. שלושה משובים קצרים מטופלים כמו שלושה תיקונים.</p></div>
+<div class="rule"><b>6</b><h3>בלי פרטים אישיים של הלקוח</h3><p>לא צריך לכתוב טלפון, תעודת זהות או פרטי תשלום. השיחה כבר מקושרת למשוב.</p></div>
+</div></section><section class="card slide help" id="help"><h2 class="sec">צריכים עזרה?</h2>
+<div class="helpgrid">
+<div><b>סרטוני הדרכה</b><p>באתר cloudchat.co.il יש סרטון לכל פעולה במערכת.</p></div>
+<div><b>קבוצת הוואטסאפ המשותפת</b><p>שאלה, תקלה או משהו לא ברור: כותבים בקבוצה ואנחנו עונים.</p></div>
+<div><b>מייל מסודר</b><p>אחרי העלייה לאוויר תקבלו מייל עם כל הקישורים, המשתמשים וההנחיות.</p></div>
+<div><b>רוצים לשנות משהו בסוכן?</b><p>משוב בפורטל (צעד 18). זו הדרך המהירה ביותר לשיפור.</p></div>
+</div></section><footer>CloudChat · מדריך עלייה לאוויר · אוקטובר 2026<br><small>הצילומים מטושטשים או לקוחים ממערכת הדגמה. המסכים אצלכם יציגו את הנתונים שלכם.</small></footer></div>
+<div id="pnav"><button id="pprev" type="button">&rarr;</button><span id="pcount" dir="ltr"></span><button id="pnext" type="button">&larr;</button><button id="pexit" type="button">יציאה</button></div>
+<script>(function(){
+  var slides=[].slice.call(document.querySelectorAll('.slide')),i=0;
+  var b=document.body,cnt=document.getElementById('pcount');
+  function show(n){i=Math.max(0,Math.min(slides.length-1,n));slides.forEach(function(s,k){s.classList.toggle('on',k===i)});cnt.textContent=(i+1)+' / '+slides.length;window.scrollTo(0,0);history.replaceState(null,'','#'+(slides[i].id||''))}
+  function enter(){b.classList.add('present');var h=location.hash.slice(1),k=slides.findIndex(function(s){return s.id===h});show(k<0?0:k)}
+  function exit(){b.classList.remove('present');slides.forEach(function(s){s.classList.remove('on')});var s=slides[i];if(s)s.scrollIntoView()}
+  document.getElementById('pres').onclick=enter;
+  document.getElementById('pexit').onclick=exit;
+  document.getElementById('pnext').onclick=function(){show(i+1)};
+  document.getElementById('pprev').onclick=function(){show(i-1)};
+  document.addEventListener('keydown',function(e){
+    if(!b.classList.contains('present')){if(e.key==='p'&&!e.ctrlKey&&!e.metaKey)enter();return}
+    if(['ArrowLeft','PageDown',' '].indexOf(e.key)>=0){e.preventDefault();show(i+1)}
+    else if(['ArrowRight','PageUp'].indexOf(e.key)>=0){e.preventDefault();show(i-1)}
+    else if(e.key==='Escape')exit();
+    else if(e.key==='Home')show(0);else if(e.key==='End')show(slides.length-1);
+  });
+  if(/[?&]present\b/.test(location.search))enter();
+})();
+</script></body></html>
