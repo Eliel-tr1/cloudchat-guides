@@ -90,6 +90,23 @@ fig('p_fb_item', 'p_fb_item', [355, 75, 730, 712], [
     (1, [940, 160, 110, 24]), (2, [409, 565, 622, 68]), (3, [392, 715, 105, 40]), (4, [505, 715, 103, 40]),
     (5, [1000, 323, 50, 22])])
 
+# ---------- Knowledge base ----------
+fig('kb_main', 'kb_main', [0, 60, 1440, 1160], [
+    (1, [1177, 208, 183, 33]), (2, [230, 138, 149, 40]), (3, [391, 138, 138, 40]), (4, [47, 210, 1089, 44]),
+    (5, [568, 663, 568, 47]), (6, [146, 772, 90, 36], 'l'), (7, [526, 976, 205, 20])])
+fig('kb_add', 'kb_add', [355, 70, 730, 720], [
+    (1, [768, 160, 280, 47]), (2, [392, 252, 656, 40]), (3, [392, 337, 656, 235]), (4, [392, 616, 656, 40]), (5, [392, 716, 86, 40])])
+fig('kb_scan', 'kb_scan', [355, 235, 730, 530], [])
+fig('kb_edit', 'kb_edit', [355, 100, 730, 660], [(1, [392, 304, 656, 235]), (2, [392, 684, 86, 40])])
+fig('kb_search', 'kb_search', [47, 440, 1090, 440], [(1, [211, 639, 900, 40]), (2, [72, 639, 127, 40]), (3, [72, 723, 1039, 140])])
+fig('kb_delete', 'kb_delete', [450, 310, 540, 240], [(1, [488, 477, 164, 40])])
+fig('kb_bin', 'kb_bin', [0, 620, 1440, 280], [(1, [567, 644, 136, 47]), (2, [351, 809, 82, 26]), (3, [221, 809, 122, 26], 'l')])
+fig('kb_auto', 'kb_auto', [40, 700, 1110, 800], [
+    (1, [72, 787, 44, 24]), (2, [775, 866, 336, 40]), (3, [72, 950, 86, 40]), (4, [72, 1094, 157, 40]),
+    (5, [72, 1196, 144, 40]), (6, [47, 1268, 1089, 52]), (7, [683, 1428, 428, 40])])
+fig('kb_props', 'kb_props', [0, 620, 1440, 400], [(1, [705, 644, 170, 47]), (2, [1027, 792, 109, 47]), (3, [47, 893, 1089, 98])])
+fig('kb_prop_open', 'kb_prop_open', [0, 0, 720, 900], [(1, [16, 246, 399, 389]), (2, [207, 848, 105, 40]), (3, [312, 848, 103, 40])])
+
 json.dump(FIGS, open(os.path.join(S, 'figs.json'), 'w'), ensure_ascii=False, indent=1)
 
 for f in ['qr_ios.svg', 'qr_android.svg', 'qr_portal.svg']:
@@ -98,5 +115,4 @@ shutil.copy(os.path.join(S, 'assets', 's10_26.png'), os.path.join(IMG, 'icon_ios
 shutil.copy(os.path.join(S, 'assets', 's10_25.png'), os.path.join(IMG, 'icon_android.png'))
 shutil.copy(os.path.join(S, 'assets', 's10_22.png'), os.path.join(IMG, 'badge_appstore.png'))
 shutil.copy(os.path.join(S, 'assets', 's10_23.png'), os.path.join(IMG, 'badge_gplay.png'))
-shutil.copy('/home/hermes/Claude Code/scale-conf/fonts/Heebo.ttf', os.path.join(OUT, 'Heebo.ttf'))
 print('figs', len(FIGS))

@@ -211,7 +211,8 @@ body.present #pnav{display:flex;position:fixed;bottom:16px;left:16px;gap:8px;ali
  .main{margin:0}.wrap{max-width:none;padding:0}
  .shot,.tip,.rule,.mini,.app,.helpgrid>div,.legend li,.tbl tr{break-inside:avoid}
  .card{break-inside:avoid;box-shadow:none}
- .frame{max-width:min(100%,calc(92mm * var(--ar)));box-shadow:none}
+ .card.long{break-inside:auto;break-before:page}
+ .frame{max-width:min(100%,calc(86mm * var(--ar)));box-shadow:none}
  .shot{padding:8px}.legend li{font-size:12.5px}p{font-size:13.5px}
  .app .qr{width:120px;height:120px}.app{padding:10px}
  .chapter{break-before:page;margin-top:0}
